@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Paralect, LLC
+  description: Role to make mongobackups
+  company: paralect
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  galaxy_tags:
+    - mongo
+    - backups
+    - system
+    - cloud
