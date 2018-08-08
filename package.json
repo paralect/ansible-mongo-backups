@@ -1,0 +1,22 @@
+{
+  "name": "ansible-mongo-backups",
+  "version": "1.0.0",
+  "description": "An ansible role for the mongodb backups",
+  "scripts": {
+    "add-contributor": "all-contributors add",
+    "generate-contributors": "all-contributors generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paralect/ansible-mongo-backups.git"
+  },
+  "author": "Paralect",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paralect/ansible-mongo-backups/issues"
+  },
+  "homepage": "https://github.com/paralect/ansible-mongo-backups#readme",
+  "devDependencies": {
+    "all-contributors-cli": "5.2.1"
+  }
+}

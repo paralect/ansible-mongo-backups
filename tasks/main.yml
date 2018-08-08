@@ -1,3 +1,11 @@
+- name: Install aws s3 console
+  apt: pkg=s3cmd state=present
+  when: object_storage_type == "aws"
+
+- name: Copy aws s3 configuration
+  copy: src=files/s3.cfg dest=aws/.s3cfg
+  when: object_storage_type == "aws"
+
 - name: Copy creating mongo backup and removing old backups scripts to production server
   sudo: yes
   copy: src=files/{{ item.src }} dest={{ item.dest }} owner=root mode=744
@@ -7,12 +15,15 @@
 
 - name: Create backup cron job
   sudo: yes
-  cron: name="mongodb backup in {{ env }}"
-    minute="0" hour="0" day="*" month="*" weekday="*"
-    job="/usr/sbin/mongodb_backup.sh {{ mongodump_path }} {{ mongo_host }} {{ mongo_port }} {{ db_name }} {{ aws_busket }}"
+  cron:
+    name: "mongodb backup in {{ env }}"
+    special_time: daily
+    job: "/usr/sbin/mongodb_backup.sh {{ mongodump_path }} {{ mongo_host }} {{ mongo_port }} {{ db_name }} {{ buсket }}"
 
 - name: Create remove old backups cron job
   sudo: yes
-  cron: name="remove mongodb backups in {{ env }}"
-    minute="0" hour="0" day="1" month="*" weekday="*"
-    job="/usr/sbin/remove-old-backups.sh {{ mongodump_path }} {{ mongo_host }} {{ mongo_port }} {{ db_name }} { aws_busket }}"
+  cron:
+    name: "remove mongodb backups in {{ env }}"
+    special_time: daily
+    job: "/usr/sbin/remove-old-backups.sh {{ buсket }}"
+  when: object_storage_type == "aws"

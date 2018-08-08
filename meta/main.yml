@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Paralect, LLC
-  description: Role to make mongobackups
+  description: Role to make mongodb backups
   company: paralect
   license: MIT
   min_ansible_version: 1.2

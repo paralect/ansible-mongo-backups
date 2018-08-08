@@ -1,10 +1,20 @@
 # Environment for which your script will be run. It's used only for cron job name.
 env: production
 # Specifies a resolvable hostname for the mongod to which to connect.
-mongo_host: 'localhost'
+mongo_host: "localhost"
 # Specifies the TCP port on which the MongoDB instance listens for client connections.
 mongo_port: 27017
 #Specifies a database to backup.
 # If you do not specify a database, mongodump copies all databases in this instance into the dump files.
 db_name:
 aws_bucket:
+
+aws_access_key: ""
+aws_secret_key: ""
+aws_access_token: ""
+
+gs_access_key_id: ""
+gs_secret_access_key: ""
+gs_project_id: ""
+
+object_storage_type: "aws"
