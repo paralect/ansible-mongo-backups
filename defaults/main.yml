@@ -1,5 +1,8 @@
 # Environment for which your script will be run. It's used only for cron job name.
 env: production
+
+mongodump_path: mongodump
+
 # Specifies a resolvable hostname for the mongod to which to connect.
 mongo_host: "localhost"
 # Specifies the TCP port on which the MongoDB instance listens for client connections.

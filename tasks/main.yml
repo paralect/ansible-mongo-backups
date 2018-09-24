@@ -6,22 +6,25 @@
   copy: src=files/s3.cfg dest=aws/.s3cfg
   when: object_storage_type == "aws"
 
-- name: Copy creating mongo backup and removing old backups scripts to production server
-  sudo: yes
+- name: Install mongo tools
+  apt: pkg=mongo-tools state=present
+
+- name: Copy creating mongo backup and removing old backups scripts to the server
+  become: yes
   copy: src=files/{{ item.src }} dest={{ item.dest }} owner=root mode=744
   with_items:
     - {src: 'files/mongodb_backup.sh', dest: '/usr/sbin/mongodb_backup.sh'}
     - {src: 'files/remove-old-backups.sh', dest: '/usr/sbin/remove-old-backups.sh'}
 
 - name: Create backup cron job
-  sudo: yes
+  become: yes
   cron:
     name: "mongodb backup in {{ env }}"
     special_time: daily
     job: "/usr/sbin/mongodb_backup.sh {{ mongodump_path }} {{ mongo_host }} {{ mongo_port }} {{ db_name }} {{ buсket }}"
 
 - name: Create remove old backups cron job
-  sudo: yes
+  become: yes
   cron:
     name: "remove mongodb backups in {{ env }}"
     special_time: daily
